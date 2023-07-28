@@ -69,13 +69,11 @@ func (s *ServerHandler) TagConn(ctx context.Context, cti *stats.ConnTagInfo) con
 
 // HandleRPC implements per-RPC tracing and stats instrumentation.
 func (s *ServerHandler) HandleRPC(ctx context.Context, rs stats.RPCStats) {
-	traceHandleRPC(ctx, rs)
 	statsHandleRPC(ctx, rs)
 }
 
 // TagRPC implements per-RPC context management.
 func (s *ServerHandler) TagRPC(ctx context.Context, rti *stats.RPCTagInfo) context.Context {
-	ctx = s.traceTagRPC(ctx, rti)
 	ctx = s.statsTagRPC(ctx, rti)
 	return ctx
 }
